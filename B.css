@@ -1,0 +1,372 @@
+/* --- B.css : FINAL VERSION (Index Fix + Contact Form + Footer) --- */
+
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+/* Opsional: Font Serif untuk Judul Contact agar mirip referensi */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --menu-bg: #ffffff;
+  --input-bg: #f4f4f4; /* Warna abu-abu kolom input */
+  --z-navbar: 2000;
+  --z-menu: 1500;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Agar footer selalu di bawah */
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* --- NAVBAR FIXED --- */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
+  z-index: var(--z-navbar);
+  background: transparent;
+}
+
+.brand {
+  font-weight: 800; font-size: 1.1rem; text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.9); padding: 8px 16px;
+  border-radius: 50px; border: 1px solid #ddd; backdrop-filter: blur(5px);
+}
+
+.menu-toggle {
+  width: 50px; height: 50px; background: #000; color: #fff;
+  border-radius: 50%; border: none; cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+  transition: transform 0.3s ease; z-index: 2001;
+}
+.menu-toggle:hover { transform: scale(1.1); }
+
+.menu-icon { position: relative; width: 18px; height: 18px; }
+.menu-icon span {
+  position: absolute; background-color: #fff; border-radius: 2px; transition: 0.4s;
+}
+.menu-icon span:nth-child(1) { width: 100%; height: 2px; top: 50%; left: 0; transform: translateY(-50%); }
+.menu-icon span:nth-child(2) { width: 2px; height: 100%; top: 0; left: 50%; transform: translateX(-50%); }
+
+body.menu-open .menu-toggle { background: #000; }
+body.menu-open .menu-icon span:nth-child(1) { transform: translateY(-50%) rotate(45deg); }
+body.menu-open .menu-icon span:nth-child(2) { transform: translateX(-50%) rotate(45deg); }
+
+
+/* --- OVERLAY MENU --- */
+.overlay-menu {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+  background-color: var(--menu-bg);
+  display: flex; flex-direction: column; justify-content: center;
+  padding-left: 8%; z-index: var(--z-menu);
+  opacity: 0; visibility: hidden; transition: 0.4s;
+}
+body.menu-open .overlay-menu { opacity: 1; visibility: visible; }
+
+.menu-links {
+  list-style: none;
+  padding: 0;
+}
+.menu-links li {
+  overflow: hidden;
+  /* Hapus margin-bottom negatif yang bikin kepotong */
+  margin-bottom: 0; 
+}
+.menu-links a {
+  display: block;
+  font-size: 8vw; /* Ukuran font besar */
+  font-weight: 700;
+  color: #000;
+  
+  /* PERBAIKAN UTAMA DISINI */
+  line-height: 1.3;      /* Beri jarak antar baris lebih lega */
+  padding: 10px 0;       /* Beri ruang atas/bawah agar huruf 'g', 'y', 'j' tidak kepotong */
+  
+  letter-spacing: -3px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.menu-links a:hover { color: #444; transform: translateX(20px) !important; }
+
+body.menu-open .menu-links li:nth-child(1) a { transition-delay: 0.1s; transform: translateY(0); }
+body.menu-open .menu-links li:nth-child(2) a { transition-delay: 0.2s; transform: translateY(0); }
+body.menu-open .menu-links li:nth-child(3) a { transition-delay: 0.3s; transform: translateY(0); }
+
+
+/* --- HERO INDEX (Fix Overlapping) --- */
+.hero-minimal {
+  width: 100%;
+  height: 100vh;       /* Tinggi Full Layar */
+  min-height: 600px;   /* Minimal tinggi agar tidak gepeng di layar pendek */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Konten di tengah vertikal */
+  align-items: center;     /* Konten di tengah horizontal */
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;          /* Di bawah navbar */
+}
+.hero-minimal h1 {
+  font-size: 4rem; font-weight: 800; letter-spacing: -2px;
+  margin-bottom: 10px; line-height: 1.1;
+}
+.hero-minimal p { font-size: 1.2rem; color: #666; font-weight: 500; }
+
+
+/* --- CONTAINER UTAMA (Biodata/Portofolio/Contact) --- */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 140px 20px 60px 20px;
+  width: 100%;
+  flex: 1; /* Mendorong footer ke bawah */
+}
+
+.page-title {
+  font-size: 4rem; font-weight: 800; margin-bottom: 40px; letter-spacing: -2px;
+}
+/* Style Judul Contact agar mirip referensi */
+.contact-title {
+  font-family: 'Plus Jakarta Sans', sans-serif; /* Font Serif Elegan */
+  font-size: 5rem;
+  font-weight: 400;
+  margin-bottom: 50px;
+}
+
+/* --- CONTACT FORM STYLE (Baru) --- */
+.contact-form {
+  display: flex; flex-direction: column; gap: 20px;
+}
+.form-group label {
+  display: block; font-size: 1.1rem; margin-bottom: 8px; font-weight: 500;
+}
+.form-group input, 
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--input-bg); /* Abu-abu muda */
+  border: none;
+  font-size: 1rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #333;
+  outline: none;
+  transition: 0.3s;
+}
+.form-group input:focus, 
+.form-group textarea:focus {
+  background-color: #eaeaea; /* Gelap dikit pas diklik */
+}
+.form-group textarea {
+  height: 150px; resize: vertical;
+}
+
+.btn-submit {
+  display: inline-block;
+  padding: 12px 40px;
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+.btn-submit:hover {
+  background-color: #000; color: #fff;
+}
+
+
+/* --- CSS Portofolio & Slider (Tetap Ada) --- */
+.project-card { margin-bottom: 100px; border-bottom: 1px solid #ddd; padding-bottom: 60px; }
+.project-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+.project-title { font-size: 2rem; font-weight: 700; }
+.slider-container { position: relative; width: 100%; height: 450px; background: #f4f4f4; overflow: hidden; border-radius: 8px; margin-bottom: 25px; }
+.slider-track { display: flex; height: 100%; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+.slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #fff; color: #000; width: 50px; height: 50px; border-radius: 50%; border: 1px solid #000; font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.2s; }
+.slider-container:hover .slider-btn { opacity: 1; }
+.prev-btn { left: 20px; } .next-btn { right: 20px; }
+
+/* --- FOOTER (Baru) --- */
+footer {
+  padding: 40px 40px; /* Samakan dengan padding Navbar */
+  border-top: 1px solid #000000; /* Garis pemisah halus */
+  margin-top: auto;
+  
+  display: flex;
+  justify-content: space-between; /* Jarak maksimal kiri-kanan */
+  align-items: center;
+  
+  font-size: 0.9rem;
+  color: #666;
+  background-color: var(--bg-color);
+}
+
+/* Style Link Sosmed */
+.footer-socials {
+  display: flex;
+  gap: 25px; /* Jarak antar link */
+}
+
+.footer-socials a {
+  color: #000; /* Hitam pekat */
+  font-weight: 600;
+  position: relative; /* Untuk animasi garis bawah */
+  transition: color 0.3s;
+}
+
+/* Efek Garis Bawah saat Hover */
+.footer-socials a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.footer-socials a:hover::after {
+  width: 100%; /* Garis memanjang */
+}
+
+/* --- STYLE KHUSUS HALAMAN RESUME --- */
+
+/* Header Resume (Nama & Kontak) */
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 30px;
+}
+
+.resume-name h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.resume-name p {
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.resume-contact {
+  text-align: right;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Section Resume (Education, Experience, etc) */
+.resume-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+/* Item Resume (Per Pekerjaan/Sekolah) */
+.resume-item {
+  display: flex;
+  justify-content: space-between; /* Kiri: Info, Kanan: Tanggal */
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Agar aman di HP */
+}
+
+.item-main {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.item-main h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.item-main h4 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.item-main ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.item-main ul li {
+  margin-bottom: 8px;
+}
+
+.item-date {
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap; /* Agar tanggal tidak turun baris sembarangan */
+}
+
+/* Tombol Download Resume */
+.download-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 40px;
+  background: #000;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.download-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+/* Responsive Mobile Resume */
+@media (max-width: 768px) {
+  .resume-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .resume-contact {
+    text-align: left;
+  }
+  .resume-item {
+    flex-direction: column;
+  }
+  .item-date {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  .resume-name h1 { font-size: 2.5rem; }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Kennan</title>
+    <link rel="stylesheet" href="B.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand">KENNAN EL YASA</a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-icon">
+                <span></span><span></span>
+            </div>
+        </button>
+    </nav>
+
+    <div class="overlay-menu">
+        <ul class="menu-links">
+            <li><a href="Portofolio.html">Projects</a></li>
+            <li><a href="Biodata.html">About</a></li> 
+            <li><a href="kontak.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <main class="container">
+        <h1 class="page-title">About</h1>
+        
+        <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+            <img src="Media/Kennanglr.jpg" style="width: 300px; height: 400px; object-fit: cover; filter: grayscale(100%);">
+            <div style="flex: 1; max-width: 600px;">
+                <p style="font-size: 1.5rem; margin-bottom: 20px;">
+                    Halo, saya Kennan. Seorang siswa SMK yang gemar memecahkan masalah melalui kode.
+                </p>
+                <p style="color: #555;">
+                    Fokus saya adalah menciptakan pengalaman digital yang tidak hanya berfungsi dengan baik, tetapi juga terlihat estetis dan mudah digunakan.
+                </p>
+            </div>
+        </div>
+    </main>
+<footer>
+        <p>&copy; 2026 Muhammad Kennan El Yasa.</p>
+        
+        <div class="footer-socials">
+             <a href="https://www.instagram.com/maskennan_/" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/in/kennan-elyasa-a65a0b298/" target="_blank">LinkedIn</a>
+            <a href="resume.html">Resume</a>
+        </div>
+    </footer>
+    <script>
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+    </script>
+
+</body>
+</html>

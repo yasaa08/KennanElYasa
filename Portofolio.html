@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Kennan</title>
+    <link rel="stylesheet" href="B.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand">KENNAN EL YASA</a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-icon"><span></span><span></span></div>
+        </button>
+    </nav>
+
+    <div class="overlay-menu">
+        <ul class="menu-links">
+            <li><a href="Portofolio.html">Projects</a></li>
+            <li><a href="Biodata.html">About</a></li>
+            <li><a href="kontak.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <main class="container">
+        <h1 class="page-title">Selected Works</h1>
+        <p class="page-subtitle">A few projects that reflect how I think and Build</p></br>
+
+        <div class="project-card" id="project-1">
+            <div class="project-header">
+                <h2 class="project-title">Clash of Clans</h2>
+                <span class="project-role">Strategy & Management</span>
+            </div>
+            
+            <div class="slider-container">
+                <button class="slider-btn prev-btn" onclick="moveSlide('p1', -1)">&#10094;</button>
+                <button class="slider-btn next-btn" onclick="moveSlide('p1', 1)">&#10095;</button>
+                
+                <div class="slider-track" id="track-p1">
+                    <img src="Media/Kennan.jpeg" alt="COC Base Design">
+                    <img src="Media/Kennanglr.jpg" alt="COC War Log">
+                    <img src="Media/MKEY.png" alt="COC Clan Stats">
+                </div>
+            </div>
+
+            <div class="project-desc">
+                Mengelola strategi pertahanan base (Town Hall 12) dan manajemen sumber daya clan. 
+                Tanggung jawab meliputi koordinasi Clan War Leagues dan optimasi farming resources.
+            </div>
+        </div>
+
+        <div class="project-card" id="project-2">
+            <div class="project-header">
+                <h2 class="project-title">Hay Day Farming</h2>
+                <span class="project-role">Economy Optimization</span>
+            </div>
+            
+            <div class="slider-container">
+                <button class="slider-btn prev-btn" onclick="moveSlide('p2', -1)">&#10094;</button>
+                <button class="slider-btn next-btn" onclick="moveSlide('p2', 1)">&#10095;</button>
+                
+                <div class="slider-track" id="track-p2">
+                    <img src="Media/KennanAja.jpg" alt="Farm Layout">
+                    <img src="Media/KennanNurra.png" alt="Roadside Shop">
+                </div>
+            </div>
+
+            <div class="project-desc">
+                Membangun sistem pertanian digital yang efisien. Fokus pada rantai produksi (Production Chain) 
+                untuk memaksimalkan profit koin dan XP dalam waktu singkat.
+            </div>
+        </div>
+
+        <div class="project-card" id="project-3">
+            <div class="project-header">
+                <h2 class="project-title">Bus Simulator ID</h2>
+                <span class="project-role">Simulation & Traffic Logic</span>
+            </div>
+            
+            <div class="slider-container">
+                <button class="slider-btn prev-btn" onclick="moveSlide('p3', -1)">&#10094;</button>
+                <button class="slider-btn next-btn" onclick="moveSlide('p3', 1)">&#10095;</button>
+                
+                <div class="slider-track" id="track-p3">
+                    <img src="Media/Mkeyi.jpeg" alt="Bus Livery Design">
+                    <img src="Media/Kennanglr.jpg" alt="Route Planning">
+                </div>
+            </div>
+
+            <div class="project-desc">
+                Simulasi navigasi kendaraan berat dengan fokus pada kepatuhan rambu lalu lintas 
+                dan kustomisasi livery kendaraan (Modding).
+            </div>
+        </div>
+
+    </main>
+<footer>
+        <p>&copy; 2026 Muhammad Kennan El Yasa.</p>
+        
+        <div class="footer-socials">
+             <a href="https://www.instagram.com/maskennan_/" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/in/kennan-elyasa-a65a0b298/" target="_blank">LinkedIn</a>
+            <a href="resume.html">Resume</a>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Menu Overlay
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+
+        // Logic Slider Gambar
+        // Kita simpan posisi slide setiap project di variable ini
+        let slideIndices = {
+            'p1': 0, // Posisi awal project 1
+            'p2': 0, // Posisi awal project 2
+            'p3': 0  // Posisi awal project 3
+        };
+
+        function moveSlide(projectId, direction) {
+            const track = document.getElementById('track-' + projectId);
+            const slides = track.getElementsByTagName('img');
+            const totalSlides = slides.length;
+
+            // Update posisi index
+            slideIndices[projectId] += direction;
+
+            // Loop: Jika lewat akhir balik ke awal, jika kurang dari 0 balik ke akhir
+            if (slideIndices[projectId] >= totalSlides) {
+                slideIndices[projectId] = 0;
+            } else if (slideIndices[projectId] < 0) {
+                slideIndices[projectId] = totalSlides - 1;
+            }
+
+            // Geser Track (Transform CSS)
+            // -100% * index (Misal index 1 berarti geser -100%, index 2 geser -200%)
+            track.style.transform = `translateX(-${slideIndices[projectId] * 100}%)`;
+        }
+    </script>
+
+</body>
+</html>

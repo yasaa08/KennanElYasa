@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Kennan</title>
+    <link rel="stylesheet" href="B.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand">KENNAN EL YASA</a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-icon"><span></span><span></span></div>
+        </button>
+    </nav>
+
+    <div class="overlay-menu">
+        <ul class="menu-links">
+            <li><a href="Portofolio.html">Projects</a></li>
+            <li><a href="Biodata.html">About</a></li>
+            <li><a href="kontak.html">Contact</a></li> </ul>
+    </div>
+
+    <main class="container">
+        <h1 class="contact-title">Contact</h1>
+
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name*</label>
+                <input type="text" id="name" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your email*</label>
+                <input type="email" id="email" placeholder="Your email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message*</label>
+                <textarea id="message" placeholder="Enter your message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+    </main>
+<footer>
+        <p>&copy; 2026 Muhammad Kennan El Yasa.</p>
+        
+        <div class="footer-socials">
+              <a href="https://www.instagram.com/maskennan_/" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/in/kennan-elyasa-a65a0b298/" target="_blank">LinkedIn</a>
+            <a href="resume.html">Resume</a>
+        </div>
+    </footer>
+<script>
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
+    </script>
+</body>
+</html>
