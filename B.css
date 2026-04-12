@@ -1,5 +1,7 @@
 /* --- B.css : FINAL VERSION (Index Fix + Contact Form + Footer) --- */
 
+/* Tambahkan ini untuk font tulisan tangan yang kece */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 /* Import Font */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
 /* Opsional: Font Serif untuk Judul Contact agar mirip referensi */
@@ -38,9 +40,15 @@ a { text-decoration: none; color: inherit; }
 }
 
 .brand {
-  font-weight: 800; font-size: 1.1rem; text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.9); padding: 8px 16px;
-  border-radius: 50px; border: 1px solid #ddd; backdrop-filter: blur(5px);
+  font-weight: 800;
+  font-size: 1.5rem; /* Sedikit lebih besar */
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: -1px; /* Agar lebih padat & modern */
+  background: none;
+  padding: 0;
+  border: none;
+  backdrop-filter: none;
 }
 
 .menu-toggle {
@@ -349,6 +357,46 @@ footer {
 .download-btn:hover {
   background: #333;
   transform: translateY(-2px);
+}
+
+/* --- STYLE KHUSUS PETUNJUK MENU (INDEX ONLY) --- */
+.click-guide {
+  position: fixed;
+  top: 40px;       /* Sesuaikan ketinggian dengan tombol menu */
+  right: 100px;    /* Geser ke kiri dari tombol menu */
+  z-index: 1900;   /* Di bawah navbar tapi di atas konten */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeInBounce 1.5s ease-out 1s forwards; /* Muncul perlahan setelah 1 detik */
+  pointer-events: none; /* Agar tidak menghalangi klik */
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+body.menu-open .click-guide {
+    opacity: 0 !important;   /* Paksa jadi transparan */
+    visibility: hidden;      /* Hilangkan dari akses klik */
+    animation: none;         /* Matikan animasi goyangnya */
+}
+
+.guide-text {
+  font-family: 'Nanum Pen Script', cursive; /* Font tulisan tangan */
+  font-size: 1.8rem;
+  color: #000;
+  transform: rotate(-5deg); /* Miring sedikit biar artistik */
+}
+
+.guide-arrow {
+  width: 50px;
+  height: auto;
+  transform: rotate(-10deg) translateY(5px);
+}
+
+/* Animasi Muncul & Goyang Dikit */
+@keyframes fadeInBounce {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 /* Responsive Mobile Resume */
