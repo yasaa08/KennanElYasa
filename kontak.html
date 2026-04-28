@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Kennan</title>
     <link rel="stylesheet" href="B.css">
+    
+    <style>
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .popup-overlay.show { display: flex; opacity: 1; }
+        .popup-content {
+            background: #ffffff; padding: 40px 30px; border-radius: 8px;
+            text-align: center; max-width: 400px; width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px); transition: transform 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        .popup-overlay.show .popup-content { transform: translateY(0); }
+        .popup-content h2 { margin-bottom: 10px; font-size: 1.8rem; color: #000; }
+        .popup-content p { color: #555; margin-bottom: 25px; line-height: 1.6; font-size: 1rem; }
+        .btn-close-popup { width: 100%; margin-top: 0; }
+    </style>
 </head>
 <body>
 
@@ -19,42 +40,101 @@
         <ul class="menu-links">
             <li><a href="Portofolio.html">Projects</a></li>
             <li><a href="Biodata.html">About</a></li>
-            <li><a href="kontak.html">Contact</a></li> </ul>
+            <li><a href="kontak.html">Contact</a></li> 
+        </ul>
     </div>
 
     <main class="container">
         <h1 class="contact-title">Contact</h1>
 
-        <form class="contact-form">
+        <form id="contactForm" action="https://formsubmit.co/ajax/muhammadkennanelyasa@gmail.com" method="POST" class="contact-form">
+            
+            <input type="hidden" name="_captcha" value="false">
+
             <div class="form-group">
                 <label for="name">Name*</label>
-                <input type="text" id="name" placeholder="Your name" required>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Your email*</label>
-                <input type="email" id="email" placeholder="Your email address" required>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
             </div>
 
             <div class="form-group">
                 <label for="message">Message*</label>
-                <textarea id="message" placeholder="Enter your message" required></textarea>
+                <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Submit</button>
         </form>
+
+        <div id="successPopup" class="popup-overlay">
+            <div class="popup-content">
+                <h2>Sent!</h2>
+                <p>Thank you, your message has been sent successfully. I will respond to your email as soon as possible.</p>
+                <button onclick="closePopup()" class="btn-submit btn-close-popup">Close</button>
+            </div>
+        </div>
+
     </main>
-<footer>
+    
+    <footer>
         <p>&copy; 2026 Muhammad Kennan El Yasa.</p>
-        
         <div class="footer-socials">
-              <a href="https://www.instagram.com/maskennan_/" target="_blank">Instagram</a>
+            <a href="https://www.instagram.com/maskennan_/" target="_blank">Instagram</a>
             <a href="https://www.linkedin.com/in/kennan-elyasa-a65a0b298/" target="_blank">LinkedIn</a>
             <a href="resume.html">Resume</a>
         </div>
     </footer>
-<script>
+    
+    <script>
         function toggleMenu() { document.body.classList.toggle('menu-open'); }
+
+        const form = document.getElementById('contactForm');
+        const popup = document.getElementById('successPopup');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            // Mengubah tombol menjadi "Mengirim..." saat proses loading
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Mengirim...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' 
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Munculkan pop up
+                popup.classList.add('show');
+                form.reset();
+                
+                // Kembalikan tombol seperti semula
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Oops! Pastikan kamu membuka website ini lewat Netlify (bukan file lokal) dan koneksi internet stabil.');
+                
+                // Kembalikan tombol seperti semula
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        function closePopup() {
+            popup.classList.remove('show');
+        }
     </script>
 </body>
 </html>
